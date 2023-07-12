@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 查找商品界面 as inout
+control 查找商品控制器 as ctrl
+entity 数据层 as dao
+database 商品信息存取 as db
+
+Admin -> inout : 输入商品信息
+Admin -> inout : 发出查找商品指令
+inout -> ctrl : 传递商品信息
+ctrl -> dao : 查询要添加的商品信息是否存在
+dao <-> db : 查询数据库
+dao -> ctrl : 返回查询结果
+
+ctrl --> inout : 商品信息已经存在
+inout -> Admin : 显示商品信息
+
+ctrl --> inout : 商品信息不存在
+inout -> Admin : 显示商品信息不存在
+
+
+@enduml

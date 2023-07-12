@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 输入输出界面 as inout
+control 数据流量管理 as disControl
+entity 存储管理 as dao
+database 用户列表存取 as db
+
+Admin -> inout : 请求列出用户列表
+inout -> disControl : 请求相应的显示数据
+disControl -> dao : 获取用户信息数据
+dao <-> db : 操作数据库
+dao -> disControl : 返回获取的用户信息
+disControl -> inout : 返回获取的用户数据
+inout -> Admin : 显示对应的用户数据
+
+@enduml

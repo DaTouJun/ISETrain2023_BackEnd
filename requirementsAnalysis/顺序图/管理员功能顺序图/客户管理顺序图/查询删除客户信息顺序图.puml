@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 查询与删除删除客户信息界面 as inout
+control 用户信息查询与删除控制器 as ctrl
+entity 存储管理 as dao
+database 用户列表存取 as db
+
+Admin -> inout : 输入相关的用户信息
+Admin -> inout : 输入完成开始删除
+inout -> ctrl : 传递用户信息
+ctrl -> dao : 查询用户
+note right :通过相应的用户信息获取其ID和其他信息
+dao <-> db : 访问数据库
+dao -> ctrl : 返回相应的用户信息
+
+ctrl --> inout : 未查询到则提示再次输入
+inout -> Admin : 提示未找到
+note right : 提示相应信息不存在 请再次输入
+
+ctrl --> inout : 查询到则传递用户信息
+
+inout --> Admin : 显示查询结果
+note right : 查询则直接显示结果
+inout --> Admin : 提示用户信息决定是否删除
+note right : 删除则开始请求是否删除
+
+
+Admin -> inout : 用户发送确认信号
+inout -> ctrl : 传递删除确认信号
+ctrl -> dao : 传递ID删除行
+dao <-> db : 删除对应条目
+ctrl -> inout : 完成删除
+inout -> Admin : 显示完成信息
+
+@enduml

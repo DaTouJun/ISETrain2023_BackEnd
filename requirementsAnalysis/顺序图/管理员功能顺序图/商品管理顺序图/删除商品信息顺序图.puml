@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 删除商品界面 as inout
+control 删除商品控制器 as ctrl
+entity 数据层 as dao
+database 商品信息存取 as db
+
+Admin -> inout : 输入商品信息
+activate inout
+Admin -> inout : 发出修改商品指令
+inout -> ctrl : 传递商品信息
+activate ctrl
+ctrl -> dao : 查询要添加的商品信息
+dao <-> db : 查询数据库
+dao -> ctrl : 返回查询结果
+
+alt 商品信息不存在 无法删除
+ctrl --> inout : 商品信息不存在
+note right : 商品信息不存在不能修改
+inout -> Admin : 提示删除失败 结束
+note right : 提示需要重新输入等 未找到无法删除
+
+else 查找到商品信息 可以删除
+
+ctrl --> inout : 查找到商品信息
+inout -> Admin : 请求是否确认删除
+
+
+alt 用户选择删除
+    Admin -> inout : 用户发送确认删除信号
+    inout -> ctrl : 传递删除信号
+    ctrl -> dao : 删除条目
+    activate dao
+    dao <-> db : 操作数据库进行删除
+    dao -> ctrl : 删除完成
+    deactivate dao
+    ctrl -> inout : 完成删除
+    inout -> Admin : 提示已经完成条目的删除
+else 用户放弃了删除
+    Admin -> inout : 用户发起放弃删除信号
+    inout -> ctrl : 传递放弃删除
+    deactivate ctrl
+    deactivate inout
+end
+
+end
+
+@enduml
