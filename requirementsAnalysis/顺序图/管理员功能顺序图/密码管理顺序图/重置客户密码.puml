@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 输入输出界面 as inout
+control 用户存在验证 as validation
+entity 数据层 as dao
+database 用户列表存取 as db
+
+Admin -> inout : 输入要重置的用户信息
+Admin -> inout : 输入确认重置信息
+inout -> validation : 传递用户信息
+validation -> dao : 查询用户信息
+dao <-> db : 数据库查询
+dao -> validation : 返回查询结果
+validation --> inout : 用户信息不存在
+inout -> Admin :  提示不存在 不能重置
+validation --> dao : 删除用户密码
+dao <-> db : 数据库删除行操作
+validation -> inout : 删除完成
+inout -> Admin : 报告重置完成
+
+
+@enduml

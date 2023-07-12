@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor Admin
+boundary 输入输出界面 as inout
+control 密码验证 as validation
+control 格式验证 as formatValid
+control 密码加密 as secure
+entity 数据层 as dao
+database 用户列表存取 as db
+
+Admin -> inout : 输入旧密码和新密码
+note right : 新密码输入两次
+Admin -> inout : 修改密码信号
+inout -> validation : 身份验证信息传递
+validation -> dao : 通过当前用户ID获取加密后密码
+dao <-> db : 访问数据库
+dao -> validation : 返回加密后密码
+validation -> validation : 验证密码是否正确
+validation --> inout : 密码错误
+inout -> Admin : 提示旧密码错误
+note right : 清除原密码框 要求输入正确的当前密码
+
+validation --> formatValid : 密码正确
+note right : 进入更改流程
+formatValid -> formatValid : 根据密码要求计算是否符合
+formatValid --> inout : 密码格式不符合要求
+inout -> Admin : 提示格式错误
+note right : 清除新密码框 要求更改
+
+formatValid --> secure : 密码格式符合要求
+secure -> dao : 存储加密密码
+dao <-> db :访问数据库
+secure -> inout : 密码修改完成
+inout -> Admin : 完成密码修改
+
+@enduml

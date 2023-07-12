@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+boundary 信息输入输出界面 as inout
+control 登录验证 as validation
+control 权限验证 as priorities
+control 操作界面 as factory
+database 用户列表存取 as db
+
+user -> inout : 输入用户名和密码
+user -> inout : 申请登录信号
+inout -> validation : 登录信息传递
+validation -> db : 通过邮箱获取相应用户密码信息
+db -> validation : 返回加密用户密码
+validation -> validation : 验证密码是否正确
+validation --> inout : 密码错误显示
+inout --> user : 向用户提示登录失败
+note right : 清空密码框
+validation --> factory : 密码为空
+note right : 进入修改密码流程
+factory -> user :  提示密码为空 并给予修改密码的操作组
+
+validation --> priorities : 密码正确进行权限验证
+
+priorities -> factory : 根据相应获得相应操作组
+note left : 对管理员和客户提供不同的操作
+
+factory -> user : 提示进入对应的功能
+
+@enduml
