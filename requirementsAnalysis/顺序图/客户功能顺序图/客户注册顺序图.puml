@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 客户 as user
+boundary 用户注册界面 as inout
+control 用户注册控制器 as ctrl
+entity 数据层 as dao
+database 用户列表存取 as db
+
+user -> inout : 输入用户名和密码
+user -> inout : 发出注册请求
+inout -> ctrl : 传递注册信息
+ctrl -> ctrl    : 验证注册信息是否合规
+
+alt 注册信息不合规
+    ctrl -> inout : 注册信息不合规
+    inout -> user   : 要求重新输入注册信息
+else 注册信息合规
+    ctrl -> dao : 记录注册新用户信息
+    dao <-> db  : 创建数据库新条目
+    ctrl -> inout   : 发送注册成功消息
+    inout -> user   : 展示注册成功信息
+end
+
+@enduml

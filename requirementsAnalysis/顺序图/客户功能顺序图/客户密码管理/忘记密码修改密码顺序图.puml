@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+boundary 忘记密码修改界面 as inout
+control 忘记密码修改控制器 as ctrl
+control 密码加密控制器 as secure
+control 邮件控制器 as mail
+entity 数据层 as dao
+database 用户列表存取 as db
+
+user -> inout : 输入用户名和邮箱
+user -> inout : 忘记密码确认重置
+
+inout -> ctrl : 身份验证信息传递
+ctrl -> dao : 通过当前用户名获取邮箱
+dao <-> db : 访问数据库
+dao -> ctrl : 返回加密后密码
+ctrl -> ctrl : 验证邮箱与输入邮箱是否正确
+alt 邮箱错误
+    ctrl --> inout : 邮箱错误
+    inout -> user : 提示输入邮箱错误
+    note right : 清除邮箱框 要求重新输入邮箱
+
+else 邮箱正确
+    ctrl -> secure : 请求生成新的合规密码
+    secure -> ctrl : 回传合规新密码
+
+    ctrl -> mail : 请求发送邮件
+    mail -> ctrl : 返回发送结果
+    alt 发送失败
+        ctrl -> inout : 显示邮件服务异常
+        inout -> user : 重置失败
+    else 发送成功
+        ctrl -> dao : 写入新密码
+        dao <-> db : 更新数据库
+        ctrl -> inout : 显示邮件服务正常
+        inout -> user : 重置成功
+    end
+end
+
+@enduml

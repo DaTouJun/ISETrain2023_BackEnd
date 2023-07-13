@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 客户 as user
+boundary 购物历史界面 as inout
+control 购物历史查看控制器 as ctrl
+entity 数据层 as dao
+database 购买历史存取操作 as db
+
+user -> inout : 申请查看购物历史
+inout -> ctrl : 传递查看购物历史指令
+
+ctrl -> dao : 查询购物历史
+dao <-> db : 查询数据库
+dao -> ctrl : 返回查询结果
+
+ctrl -> inout : 返回购物历史
+inout -> user : 返回购物历史信息
+
+@enduml

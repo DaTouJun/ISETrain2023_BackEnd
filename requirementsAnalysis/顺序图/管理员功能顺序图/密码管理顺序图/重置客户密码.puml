@@ -4,7 +4,7 @@
 autonumber
 
 actor Admin
-boundary 输入输出界面 as inout
+boundary 管理员面膜管理界面 as inout
 control 用户存在验证 as validation
 entity 数据层 as dao
 database 用户列表存取 as db

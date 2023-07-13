@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 客户 as user
+boundary 购物车结算界面 as cashPlat
+control 购物车结算控制器 as ctrl1
+boundary 支付界面 as payPlat
+control 支付控制器 as ctrl2
+entity 数据层 as dao
+database 购物车存取 as dbC
+database 购物历史存取 as dbL
+database 商品列表存取 as dbP
+
+user -> cashPlat : 发出结算请求
+cashPlat -> ctrl1 : 发出结算信号
+ctrl1 -> dao : 请求购物车物品列表
+dao <-> dbC : 给出购物车物品列表
+dao -> ctrl1 : 给出购物车物品列表
+ctrl1 -> ctrl1 : 计算购买金额
+ctrl1 -> payPlat : 给出支付金额
+payPlat -> user : 显示支付金额和选择支付方式
+user -> payPlat : 给出支付操作
+payPlat -> ctrl2 : 传递支付信息
+ctrl2 -> ctrl2 : 计算支付是否成功
+alt 支付成功
+    ctrl2 -> ctrl1 : 支付完成
+    ctrl1 -> dao : 存储购买结果
+    dao <-> dbL : 新建购买成功条目
+    ctrl1 -> dao : 清空购物车
+    dao <-> dbC :  删除购物车条目
+    ctrl1 -> dao : 更新商品库存
+    dao <-> dbP : 更新商品库存条目
+    ctrl1 -> payPlat : 提示支付购买成功
+    payPlat -> user : 显示购买结果
+else 支付失败
+    ctrl2 -> ctrl1 : 停止购买过程
+    ctrl1 -> payPlat : 给出支付失败消息
+    payPlat -> user : 提示支付失败
+end
+
+@enduml

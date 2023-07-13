@@ -4,7 +4,7 @@
 autonumber
 
 actor Admin
-boundary 输入输出界面 as inout
+boundary 管理员密码管理界面 as inout
 control 密码验证 as validation
 control 格式验证 as formatValid
 control 密码加密 as secure

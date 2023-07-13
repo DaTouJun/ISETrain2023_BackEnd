@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+boundary 用户购物车删除物品界面 as inout
+control 购物车商品删除控制器 as ctrl
+entity 数据层 as dao
+database 购物车信息存取 as dbC
+
+user -> inout : 输入删除的购物车物品信息
+user -> inout : 发送删除信号
+inout -> ctrl : 发送删除信息
+ctrl -> dao : 查询商品信息
+dao <-> dbC : 查询购物车数据库
+dao -> ctrl : 返回商品信息
+
+alt 不满足购物车商品删除条件
+    ctrl -> inout : 给出无法删除的信号
+    inout -> user : 显示无法删除
+    note right : 给出无法购买原因 未在购物车找到物品
+else 满足购物车商品删除条件
+    ctrl -> inout : 请求是否确认删除
+    inout -> user : 向用户请求是否删除
+    user -> inout : 用户给出确认信息
+    inout -> ctrl : 确认信息传递
+
+    alt 用户确认了删除信息
+        ctrl -> dao : 购物车删除物品
+        dao <-> dbC : 删除购物车条目
+        ctrl -> inout :  已经从购物车删除
+        inout -> user : 显示成功删除的信息
+    else 用户取消了删除
+        ctrl -> ctrl : 取消删除相关操作
+    end
+end
+
+@enduml

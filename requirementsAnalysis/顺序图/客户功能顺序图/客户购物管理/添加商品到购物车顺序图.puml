@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor 用户 as user
+boundary 用户添加购物车界面 as inout
+control 添加商品到购物车控制器 as ctrl
+entity 数据层 as dao
+database 商品信息存取 as dbP
+database 购物车信息存取 as dbC
+
+user -> inout : 输入要购买的商品编号和数量
+user -> inout : 发送购买信号
+inout -> ctrl : 发送购买信息
+ctrl -> dao : 查询商品信息
+dao <-> dbP : 查询商品数据库
+dao -> ctrl : 返回商品信息
+
+alt 商品不满足购买条件
+    ctrl -> inout : 给出无法购买的信号
+    inout -> user : 显示无法购买
+    note right : 给出无法购买原因 找不到商品还是数量不足
+else 商品满足购买条件
+    ctrl -> dao : 购物车增加数量
+    dao <-> dbC : 添加购物车条目
+    ctrl -> inout :  已经添加购物车
+    inout -> user : 显示添加购物车的信息
+end
+
+@enduml
