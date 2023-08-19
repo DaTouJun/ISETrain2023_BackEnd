@@ -21,7 +21,7 @@ public class UserDaoImpl implements DaoInterface {
                 "TotalConsumptions=?, Password=?, " +
                 "FailedTried=? WHERE ID=?";
         if (user.getName() == null || user.getEmail() == null
-                || user.getName().equals("") || user.getEmail().equals("")) {
+                || user.getName().isEmpty() || user.getEmail().isEmpty()) {
             System.err.println("In " + getClass().getName() +
                     " the updated User are not ready\n" + user);
             return;
@@ -60,7 +60,7 @@ public class UserDaoImpl implements DaoInterface {
             return;
         }
         if (user.getName() == null || user.getEmail() == null
-                || user.getName().equals("") || user.getEmail().equals("")) {
+                || user.getName().isEmpty() || user.getEmail().isEmpty()) {
             System.err.println("In " + getClass().getName() +
                     " the insert User are not ready\n" + user);
             return;

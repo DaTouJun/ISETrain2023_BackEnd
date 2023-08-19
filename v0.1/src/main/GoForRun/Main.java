@@ -1,6 +1,9 @@
-public class Main {
+import processes.ProcessInstance;
+import processes.menus.WelcomeMenu;
+
+class Main{
     public static void main(String[] args) {
-        GeneralUI ui = new GeneralUI();
-        ui.start();
+        // start CLI
+        ProcessInstance processInstance = new ProcessInstance(new WelcomeMenu());
     }
 }

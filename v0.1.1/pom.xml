@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.example</groupId>
-    <artifactId>ShopSystem_v0.1</artifactId>
-    <version>0.1</version>
+    <artifactId>ShopSystem</artifactId>
+    <version>0.1.1</version>
     <name>Archetype - ShopSystem</name>
     <url>http://maven.apache.org</url>
     <properties>

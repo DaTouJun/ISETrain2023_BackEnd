@@ -11,7 +11,7 @@ import java.util.Date;
 @ToString
 public class User implements Storable {
     private int ID;
-    private String name;    // not null
+    private String name;    // Not null
     private int level = 3;
     private String email;   // Not null
     private String phoneNumber;
@@ -36,3 +36,4 @@ create table ShopBackend.UserList
     FailedTried       int       default 0                 null comment '记录存储登录失败的次数'
 );
  */
+

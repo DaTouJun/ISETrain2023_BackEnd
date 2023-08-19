@@ -2,6 +2,8 @@ package connections;
 
 import java.util.Scanner;
 
+// 方便后续改成玩网络连接
+
 public class Connections {
     private static Scanner scanner;
 
@@ -22,7 +24,16 @@ public class Connections {
         System.out.println(data);
     }
 
+
+    public void sendData(String []data){
+        for (var val : data){
+            System.out.println(val);
+        }
+    }
+
     public String getData(){
-        return scanner.next();
+        String s = scanner.next();
+//        System.out.println(s);
+        return s;
     }
 }

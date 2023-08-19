@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import pojo.Storable;
 import pojo.User;
 import utils.SHA1Generator;
-
 import java.util.ArrayList;
 
 public class UserDaoTest {
@@ -69,6 +68,7 @@ public class UserDaoTest {
 
     @BeforeAll
     public static void exampleInserter() {
+        System.out.println("添加测试用的初始用户");
         User user = new User();
         user.setName("TestName1");
         user.setEmail("Test@test.com");
@@ -80,6 +80,7 @@ public class UserDaoTest {
 
     @AfterAll
     public static void exampleDelete(){
+        System.out.println("删除添加的用户");
         UserDaoImpl userDao = new UserDaoImpl();
         userDao.deleteByID(userDao.searchByName("TestName").getID());
         userDao.deleteByID(userDao.searchByName("TestName1").getID());
@@ -88,6 +89,7 @@ public class UserDaoTest {
 
     @Test
     void testGetUserNameLike() {
+        System.out.println("测试模糊搜索名称");
         ArrayList<Storable> users;
         UserDaoImpl userDao = new UserDaoImpl();
         users = userDao.queryLikeName("Test");
@@ -103,6 +105,7 @@ public class UserDaoTest {
 
     @Test
     void testDeleteByID(){
+        System.out.println("测试通过ID删除");
         UserDaoImpl userDao = new UserDaoImpl();
         User user = new User();
         user.setName("Test1");

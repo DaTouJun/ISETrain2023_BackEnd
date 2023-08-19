@@ -2,6 +2,8 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DBUtils {
     private static Connection con;
@@ -36,6 +38,13 @@ public class DBUtils {
     public static Connection getConnection() {
         if (con == null) {
             var connection = DBUtils.getInstance();
+        }
+        try {
+            PreparedStatement ps = con.prepareStatement("SET time_zone = 'Asia/Shanghai'");
+            ps.execute();
+            ps.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return con;
     }
