@@ -17,9 +17,9 @@ public class LoginController implements Controllers {
     // 3:   用户密码为空 进入重置流程
 
 
-    boolean userChanged;
     User currentUser;
 
+    boolean userChanged;
     @Override
     public boolean getUserChanged() {
         return userChanged;
@@ -90,7 +90,7 @@ public class LoginController implements Controllers {
         return switch (state) {
             case 0 -> new AdminFuncMenu();
             case 1 -> new UserFuncMenu();
-            case 3 -> new ResetPasswordController();
+            case 3 -> new ForgetPasswordController();
             default -> null;
         };
     }

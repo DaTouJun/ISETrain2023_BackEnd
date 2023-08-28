@@ -1,5 +1,6 @@
 package dao;
 
+import connections.Connections;
 import pojo.Storable;
 import pojo.User;
 import utils.DBUtils;
@@ -12,6 +13,18 @@ import java.util.ArrayList;
 
 
 public class UserDaoImpl implements DaoInterface {
+    private static UserDaoImpl instance;
+
+    public static DaoInterface getInstance() {
+        if (instance == null)
+            instance = new UserDaoImpl();
+        return instance;
+    }
+
+    private UserDaoImpl(){
+        instance = new UserDaoImpl();
+    }
+
     @Override
     public void updateByID(Storable object) {
         User user = (User) object;
@@ -119,7 +132,7 @@ public class UserDaoImpl implements DaoInterface {
             user = singleCopy(rs);
             users.add(user);
         }
-        if (users.size() == 0)
+        if (users.isEmpty())
             return null;
         return users;
     }

@@ -4,6 +4,7 @@ import connections.Connections;
 import pojo.User;
 import processes.Processes;
 import processes.controller.LoginController;
+import processes.controller.RegisterController;
 
 public class WelcomeMenu implements Menus {
     @Override
@@ -26,9 +27,11 @@ public class WelcomeMenu implements Menus {
         }
 
         switch (nextInstructions){
-            case 1:
+            case 1 :
                 return new LoginController();
-            
+            case 2:
+                return new RegisterController();
+            case 3:
 
             default:
                 System.out.println("输入错误");

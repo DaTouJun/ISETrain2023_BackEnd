@@ -3,6 +3,7 @@ package utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
 public class SHA1Generator {
     public static String getSHA1(String code){
         MessageDigest messageDigest;

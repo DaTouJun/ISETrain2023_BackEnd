@@ -16,7 +16,7 @@ public class UserDaoTest {
         User user = new User();
         user.setName("TestName");
         user.setEmail("Test@test.com");
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         userDao.insert(user);
         User user2 = (User) userDao.searchByName("TestName");
         System.out.println(user2);
@@ -24,7 +24,8 @@ public class UserDaoTest {
 
     @Test
     public void testUserInsertAndSearchByID() {
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
+//        UserDaoImpl ud = UserDao
         User user2 = (User) userDao.searchByID(1);
         System.out.println(user2);
     }
@@ -38,7 +39,7 @@ public class UserDaoTest {
         user.setLevel(1);
         user.setPasswordSHA1(SHA1Generator.getSHA1("Test"));
         user.setTotalConsumptions(21.1);
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         userDao.updateByID(user);
     }   // Should fail with : In dao.UserDaoImpl the User are not ready
 
@@ -51,14 +52,14 @@ public class UserDaoTest {
         user.setLevel(1);
         user.setPasswordSHA1(SHA1Generator.getSHA1("Test"));
         user.setTotalConsumptions(21.1);
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         userDao.updateByID(user);
     }   // Should work
 
     @Test
     void testGetAllUsers() {
         ArrayList<Storable> users;
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         users = userDao.queryAll();
         for (Storable st : users) {
             User user = (User) st;
@@ -72,7 +73,7 @@ public class UserDaoTest {
         User user = new User();
         user.setName("TestName1");
         user.setEmail("Test@test.com");
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         userDao.insert(user);
         user.setName("TestName2");
         userDao.insert(user);
@@ -81,7 +82,7 @@ public class UserDaoTest {
     @AfterAll
     public static void exampleDelete(){
         System.out.println("删除添加的用户");
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         userDao.deleteByID(userDao.searchByName("TestName").getID());
         userDao.deleteByID(userDao.searchByName("TestName1").getID());
         userDao.deleteByID(userDao.searchByName("TestName2").getID());
@@ -91,7 +92,7 @@ public class UserDaoTest {
     void testGetUserNameLike() {
         System.out.println("测试模糊搜索名称");
         ArrayList<Storable> users;
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao =(UserDaoImpl) UserDaoImpl.getInstance();
         users = userDao.queryLikeName("Test");
         if (users == null)
             System.err.println("err users is null");
@@ -106,7 +107,7 @@ public class UserDaoTest {
     @Test
     void testDeleteByID(){
         System.out.println("测试通过ID删除");
-        UserDaoImpl userDao = new UserDaoImpl();
+        UserDaoImpl userDao = (UserDaoImpl) UserDaoImpl.getInstance();
         User user = new User();
         user.setName("Test1");
         user.setEmail("a@a.com");
