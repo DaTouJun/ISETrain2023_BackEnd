@@ -22,6 +22,7 @@ public class DBUtils {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (java.lang.ClassNotFoundException e) {
+            System.out.println("没有对应的数据库连接方式");
             e.printStackTrace();
         }
         try {
@@ -39,11 +40,13 @@ public class DBUtils {
         if (con == null) {
             var connection = DBUtils.getInstance();
         }
+
         try {
             PreparedStatement ps = con.prepareStatement("SET time_zone = 'Asia/Shanghai'");
             ps.execute();
             ps.close();
         } catch (SQLException e) {
+            System.out.println("无法连接到数据库");
             throw new RuntimeException(e);
         }
         return con;

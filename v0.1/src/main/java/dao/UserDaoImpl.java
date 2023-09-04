@@ -1,6 +1,5 @@
 package dao;
 
-import connections.Connections;
 import pojo.Storable;
 import pojo.User;
 import utils.DBUtils;
@@ -15,14 +14,13 @@ import java.util.ArrayList;
 public class UserDaoImpl implements DaoInterface {
     private static UserDaoImpl instance;
 
-    public static DaoInterface getInstance() {
+    public static UserDaoImpl getInstance() {
         if (instance == null)
             instance = new UserDaoImpl();
         return instance;
     }
 
     private UserDaoImpl(){
-        instance = new UserDaoImpl();
     }
 
     @Override
@@ -48,10 +46,8 @@ public class UserDaoImpl implements DaoInterface {
             ps.setDouble(5, user.getTotalConsumptions());
             ps.setString(6, user.getPasswordSHA1());
             ps.setInt(7, user.getFailedTried());
-
             ps.setInt(8, user.getID());
 
-            System.out.println(ps);
             ps.executeUpdate();
             ps.close();
         } catch (java.sql.SQLException e) {
@@ -104,7 +100,6 @@ public class UserDaoImpl implements DaoInterface {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 
@@ -206,6 +201,25 @@ public class UserDaoImpl implements DaoInterface {
             ResultSet rs = ps.executeQuery();
             all = copyUserList(rs);
             return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Storable searchByEmail(String email) {
+        String sql = "Select * from UserList Where Email=?";
+        if (email == null) {
+            System.err.println(getClass().getName() + "Email = null !!");
+        }
+        try {
+            PreparedStatement ps = DBUtils.getConnection().prepareStatement(sql);
+            ps.closeOnCompletion();
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next())
+                return null;
+            return copySingleUser(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }

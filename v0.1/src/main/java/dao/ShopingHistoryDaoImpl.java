@@ -4,18 +4,8 @@ import pojo.Storable;
 
 import java.util.ArrayList;
 
-public class ShoppingCartDaoImpl implements DaoInterface {
-    private static DaoInterface instance;
-
-    public static DaoInterface getInstance(){
-        if (instance == null)
-            instance = new ShopingHistoryDaoImpl();
-        return instance;
-    }
-
-    private ShoppingCartDaoImpl() {
-    }
-
+public class ShopingHistoryDaoImpl implements DaoInterface{
+    // TODO:
     @Override
     public void updateByID(Storable object) {
 
