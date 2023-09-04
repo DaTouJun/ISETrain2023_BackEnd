@@ -3,6 +3,8 @@ package processes.menus;
 import connections.Connections;
 import pojo.User;
 import processes.Processes;
+import processes.controller.ForgetPasswordController;
+import processes.controller.NullPasswordController;
 import processes.controller.LoginController;
 import processes.controller.RegisterController;
 
@@ -20,22 +22,20 @@ public class WelcomeMenu implements Menus {
     public Processes getNextProcess(User user) {
         int nextInstructions = -1;
         try {
-//            nextInstructions = Integer.getInteger(Connections.getInstance().getData());
             nextInstructions = Integer.decode(Connections.getInstance().getData());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("输入的字符错误，应为数字");
+            return new WelcomeMenu();
         }
 
-        switch (nextInstructions){
-            case 1 :
-                return new LoginController();
-            case 2:
-                return new RegisterController();
-            case 3:
-
-            default:
+        return switch (nextInstructions) {
+            case 1 -> new LoginController();
+            case 2 -> new RegisterController();
+            case 3 -> new ForgetPasswordController();
+            default -> {
                 System.out.println("输入错误");
-                return null;
-        }
+                yield null;
+            }
+        };
     }
 }

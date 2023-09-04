@@ -32,8 +32,6 @@ public class Connections {
     }
 
     public String getData(){
-        String s = scanner.next();
-//        System.out.println(s);
-        return s;
+        return scanner.next();
     }
 }
