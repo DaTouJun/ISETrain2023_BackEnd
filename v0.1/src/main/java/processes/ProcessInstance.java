@@ -19,6 +19,7 @@ public class ProcessInstance {
         user.setLevel(4);
         user.setName("游客");
         while (currentProcess != null) {
+            // 菜单不会改变用户状态
             // 如果是菜单 则显示菜单并进一步判权
             if (currentProcess instanceof Menus) { // 如果是菜单，则进行显示功能和功能表的判别
                 menus = (Menus) currentProcess;
@@ -29,12 +30,11 @@ public class ProcessInstance {
                 // 如果是控制器，说明进入了功能则进行功能的执行
                 Controllers controllers = (Controllers) currentProcess;
                 controllers.startProcess(user);
-                if (controllers.getUserChanged()) {
+                if (controllers.getUserChanged())
                     user = controllers.getUser();
-                    nextProcess = controllers.getProcess();
-                }
+                nextProcess = controllers.getProcess();
             }
-            if (nextProcess != null) {
+            if (nextProcess != null) {  // 不为空就切换   为空就恢复至主菜单
                 currentProcess = nextProcess;
             } else {
                 currentProcess = new WelcomeMenu();

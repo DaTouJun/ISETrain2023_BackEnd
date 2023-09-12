@@ -1,27 +1,24 @@
-package processes.controller;
+package processes.controller.normalUser;
 
 import pojo.User;
 import processes.Processes;
-import processes.menus.Menus;
+import processes.controller.Controllers;
 
-// FIXME:未完成
-public class RegisterController implements Controllers{
-    User currentUser;
-    boolean userChanged;
+public class ShoppingHistoryController implements Controllers {
+    // TODO
     @Override
     public boolean getUserChanged() {
-        return userChanged;
+        return false;
     }
 
     @Override
     public void startProcess(User user) {
-        currentUser = user;
 
     }
 
     @Override
     public User getUser() {
-        return currentUser;
+        return null;
     }
 
     @Override
