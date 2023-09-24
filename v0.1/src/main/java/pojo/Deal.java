@@ -21,3 +21,17 @@ public class Deal implements Storable {
     private String dealFingerPrint;
 }
 
+/*
+create table ShopBackend.DealList
+(
+    ID              int auto_increment
+        primary key,
+    ItemID          int          null,
+    ItemName        varchar(256) not null,
+    UserID          varchar(256) null,
+    addDate         datetime     null,
+    Price           double       null,
+    Num             mediumtext   not null,
+    DealFingerPrint varchar(256) null
+);
+ */

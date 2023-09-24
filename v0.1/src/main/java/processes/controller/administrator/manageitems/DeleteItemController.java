@@ -1,18 +1,15 @@
-package processes.controller.normalUser;
+package processes.controller.administrator.manageitems;
 
 import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
-import processes.menus.normalUser.UserFuncMenu;
 
-public class ShoppingHistoryController implements Controllers {
-    boolean userChanged;
-    User user;
-    int state = 0;
+public class DeleteItemController implements Controllers {
 
+    // TODO
     @Override
     public boolean getUserChanged() {
-        return userChanged;
+        return false;
     }
 
     @Override
@@ -22,14 +19,11 @@ public class ShoppingHistoryController implements Controllers {
 
     @Override
     public User getUser() {
-        return user;
+        return null;
     }
 
     @Override
     public Processes getProcess() {
-        // TODO:
-
-
-        return new UserFuncMenu();
+        return null;
     }
 }

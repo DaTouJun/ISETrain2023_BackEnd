@@ -29,6 +29,10 @@ public class CartItem implements Storable {
         price = item.getRetailPrice();
         // wait for item
     }
+
+    public String showToCustomer() {
+        String ar = "名称: " + name + "  ID:" + itemID + "  单价:" + price + "  数量: " + num;
+    }
 }
 
 /*

@@ -13,9 +13,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ShoppingCartDaoImpl implements DaoInterface {
-    private static DaoInterface instance;
+    private static ShoppingCartDaoImpl instance;
 
-    public static DaoInterface getInstance() {
+    public static ShoppingCartDaoImpl getInstance() {
         if (instance == null)
             instance = new ShoppingCartDaoImpl();
         return instance;
@@ -130,6 +130,19 @@ public class ShoppingCartDaoImpl implements DaoInterface {
         return carts;
     }
 
+    private ArrayList<CartItem> copyCartItemList_(ResultSet rs) throws SQLException {
+        ArrayList<CartItem> carts = new ArrayList<>();
+        CartItem cartItem;
+        while (rs.next()) {
+            cartItem = singleCopy(rs);
+            carts.add(cartItem);
+        }
+        if (carts.isEmpty()) {
+            return null;
+        }
+        return carts;
+    }
+
     @Override
     public Storable searchByID(int ID) {
         String sql = "Select * from CartList Where ID=?";
@@ -194,6 +207,23 @@ public class ShoppingCartDaoImpl implements DaoInterface {
 
             ResultSet rs = ps.executeQuery();
             all = copyCartItemList(rs);
+            return all;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<CartItem> queryUserID(int UserID) {
+        String sql = "Select * from CartList Where CartList.UserID = ?";
+        ArrayList<CartItem> all;
+        try {
+            PreparedStatement ps = DBUtils.getConnection().prepareStatement(sql);
+            ps.closeOnCompletion();
+            ps.setInt(1, UserID);
+
+            ResultSet rs = ps.executeQuery();
+            all = copyCartItemList_(rs);
             return all;
         } catch (SQLException e) {
             e.printStackTrace();
