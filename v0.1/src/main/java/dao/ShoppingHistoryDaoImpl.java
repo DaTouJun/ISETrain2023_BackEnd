@@ -13,13 +13,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ShoppingHistoryDaoImpl implements DaoInterface {
-    // TODO:
+
     private ShoppingHistoryDaoImpl() {
     }
 
-    private ShoppingHistoryDaoImpl instance;
+    private static ShoppingHistoryDaoImpl instance;
 
-    public ShoppingHistoryDaoImpl getInstance() {
+    public static ShoppingHistoryDaoImpl getInstance() {
         if (instance != null)
             instance = new ShoppingHistoryDaoImpl();
         return instance;
@@ -135,6 +135,19 @@ public class ShoppingHistoryDaoImpl implements DaoInterface {
         return deals;
     }
 
+    private ArrayList<Deal> copyDealList_(ResultSet rs) throws SQLException {
+        ArrayList<Deal> deals = new ArrayList<>();
+        Deal cartItem;
+        while (rs.next()) {
+            cartItem = singleCopy(rs);
+            deals.add(cartItem);
+        }
+        if (deals.isEmpty()) {
+            return null;
+        }
+        return deals;
+    }
+
     @Override
     public Storable searchByID(int ID) {
         String sql = "Select * from DealList Where ID=?";
@@ -192,16 +205,16 @@ public class ShoppingHistoryDaoImpl implements DaoInterface {
         return null;
     }
 
-    public ArrayList<Storable> queryUserID(int UserID) {
+    public ArrayList<Deal> queryUserID(int UserID) {
         String sql = "Select * from DealList Where DealList.UserID = ?";
-        ArrayList<Storable> all;
+        ArrayList<Deal> all;
         try {
             PreparedStatement ps = DBUtils.getConnection().prepareStatement(sql);
             ps.closeOnCompletion();
             ps.setInt(1, UserID);
 
             ResultSet rs = ps.executeQuery();
-            all = copyDealList(rs);
+            all = copyDealList_(rs);
             return all;
         } catch (SQLException e) {
             e.printStackTrace();

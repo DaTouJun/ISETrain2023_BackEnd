@@ -3,6 +3,7 @@ package processes.menus.normalUser;
 import connections.Connections;
 import pojo.User;
 import processes.Processes;
+import processes.controller.normalUser.AlterPasswordController;
 import processes.controller.normalUser.ExploreItemsController;
 import processes.controller.normalUser.ShoppingCartController;
 import processes.controller.normalUser.ShoppingHistoryController;
@@ -14,11 +15,12 @@ public class UserFuncMenu implements Menus {
 
     @Override
     public void showMenu(User user) {
-        String[] menus = new String[4];
+        String[] menus = new String[5];
         menus[0] = "1.浏览商品";
         menus[1] = "2.进入购物车";
         menus[2] = "3.查看购物历史";
-        menus[3] = "0.退出";
+        menus[3] = "4.修改密码";
+        menus[4] = "0.退出";
         Connections.getInstance().sendData(menus);
     }
 
@@ -36,6 +38,7 @@ public class UserFuncMenu implements Menus {
             case 1 -> new ExploreItemsController();
             case 2 -> new ShoppingCartController();
             case 3 -> new ShoppingHistoryController();
+            case 4 -> new AlterPasswordController();
             case 0 -> new WelcomeMenu();
             default -> {
                 System.out.println("输入错误，请重新输入");

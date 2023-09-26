@@ -26,7 +26,7 @@ public class ItemDaoImpl implements DaoInterface {
         item.setID(rs.getInt("ID"));
         item.setName(rs.getString("Name"));
         item.setProducer(rs.getString("Producer"));
-        item.setDataInProduced(DateUtilToSql.reconv(rs.getDate("dataInProduced")));
+        item.setDateInProduced(DateUtilToSql.reconv(rs.getDate("dataInProduced")));
         item.setPrimeCost(rs.getDouble("PrimeCost"));
         item.setRetailPrice(rs.getDouble("RetailPrice"));
         item.setNum(rs.getLong("Num"));
@@ -67,7 +67,7 @@ public class ItemDaoImpl implements DaoInterface {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, item.getName());
             ps.setString(2, item.getProducer());
-            ps.setDate(3, utils.DateUtilToSql.conv(item.getDataInProduced()));
+            ps.setDate(3, utils.DateUtilToSql.conv(item.getDateInProduced()));
             ps.setString(4, item.getType());
             ps.setDouble(5, item.getPrimeCost());
             ps.setDouble(6, item.getRetailPrice());
@@ -100,7 +100,7 @@ public class ItemDaoImpl implements DaoInterface {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, item.getName());
             ps.setString(2, item.getProducer());
-            ps.setDate(3, DateUtilToSql.conv(item.getDataInProduced()));
+            ps.setDate(3, DateUtilToSql.conv(item.getDateInProduced()));
             ps.setString(4, item.getType());
             ps.setDouble(5, item.getPrimeCost());
             ps.setDouble(6, item.getRetailPrice());

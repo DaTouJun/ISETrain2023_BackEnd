@@ -3,7 +3,7 @@ package processes.controller.administrator;
 import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
-
+// TODO
 public class PasswordController implements Controllers {
     @Override
     public boolean getUserChanged() {

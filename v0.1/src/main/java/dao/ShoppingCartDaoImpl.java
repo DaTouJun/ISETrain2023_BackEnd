@@ -215,7 +215,7 @@ public class ShoppingCartDaoImpl implements DaoInterface {
     }
 
     public ArrayList<CartItem> queryUserID(int UserID) {
-        String sql = "Select * from CartList Where CartList.UserID = ?";
+        String sql = "Select * from CartList Where CartList.BelongUserID = ?";
         ArrayList<CartItem> all;
         try {
             PreparedStatement ps = DBUtils.getConnection().prepareStatement(sql);

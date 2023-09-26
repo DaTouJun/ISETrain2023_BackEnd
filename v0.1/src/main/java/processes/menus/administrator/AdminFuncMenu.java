@@ -3,6 +3,7 @@ package processes.menus.administrator;
 import connections.Connections;
 import pojo.User;
 import processes.Processes;
+import processes.controller.LoginController;
 import processes.controller.administrator.ManageUserController;
 import processes.controller.administrator.PasswordController;
 import processes.menus.Menus;
@@ -15,7 +16,7 @@ public class AdminFuncMenu implements Menus {
         menus[0] = "1.客户管理";
         menus[1] = "2.商品管理";
         menus[2] = "3.密码管理";
-        menus[3] = "0.返回登录菜单";
+        menus[3] = "0.退出登录";
         Connections.getInstance().sendData(menus);
     }
 
@@ -33,7 +34,7 @@ public class AdminFuncMenu implements Menus {
             case 1 -> new ManageUserController();
             case 2 -> new ManageItemsMenu();
             case 3 -> new PasswordController();
-            case 0 -> new AdminFuncMenu();
+            case 0 -> new WelcomeMenu();
             default -> {
                 System.out.println("输入错误，请重新输入");
                 yield new AdminFuncMenu();

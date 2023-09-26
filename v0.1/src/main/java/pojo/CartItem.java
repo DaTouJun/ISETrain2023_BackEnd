@@ -31,7 +31,7 @@ public class CartItem implements Storable {
     }
 
     public String showToCustomer() {
-        String ar = "名称: " + name + "  ID:" + itemID + "  单价:" + price + "  数量: " + num;
+        return "名称: " + name + "  ID:" + itemID + "  单价:" + price + "  数量: " + num;
     }
 }
 
