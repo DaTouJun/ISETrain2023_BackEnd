@@ -34,9 +34,9 @@ public class User implements Storable {
 
     public String toAdminString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        return "用户编号" + ID + "  用户名 " + name + " 用户等级 : " + getLevelString() +
-                "邮箱 : " + email + " 电话号码 : " + phoneNumber + " 总消费 : " + totalConsumptions
-                + " 注册时间 : " + sdf.format(registeredTime);
+        return "用户编号" + ID + "  用户名 : " + name + "  用户等级 : " + getLevelString() +
+                "  邮箱 : " + email + "  电话号码 : " + phoneNumber + "  总消费 : " + totalConsumptions
+                + "  注册时间 : " + sdf.format(registeredTime);
     }
 }
 

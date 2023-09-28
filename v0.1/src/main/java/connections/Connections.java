@@ -2,6 +2,7 @@ package connections;
 
 import java.util.Scanner;
 
+// 这是初衷，可惜
 // 方便后续改成玩网络连接
 
 public class Connections {
