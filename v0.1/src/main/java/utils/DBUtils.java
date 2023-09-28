@@ -32,6 +32,7 @@ public class DBUtils {
                     "Guansheng2023"
             );
         } catch (java.sql.SQLException e) {
+            System.out.println("连接不到数据库");
             e.printStackTrace();
         }
     }

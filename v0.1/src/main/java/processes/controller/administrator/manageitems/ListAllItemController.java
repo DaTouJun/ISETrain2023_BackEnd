@@ -10,7 +10,7 @@ import processes.menus.administrator.ManageItemsMenu;
 
 import java.util.ArrayList;
 
-// TODO
+
 public class ListAllItemController implements Controllers {
     boolean userChanged;
     User currentUser;

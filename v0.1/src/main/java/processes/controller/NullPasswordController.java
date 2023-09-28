@@ -8,7 +8,6 @@ import processes.menus.WelcomeMenu;
 import utils.PasswordValidation;
 import utils.SHA1Generator;
 
-// FIXME:未完成
 public class NullPasswordController implements Controllers {
     boolean userChanged;
     User currentUser;
@@ -26,6 +25,7 @@ public class NullPasswordController implements Controllers {
         con.sendData("开始重置密码");
         UserDaoImpl ud = UserDaoImpl.getInstance();
         con.sendData("请输入密码");
+        System.out.println("密码要求大于5个字符 大小写字母 标点和数字的组合");
         String newPW = con.getData();
         boolean pwOk = PasswordValidation.validation(newPW);
         if (pwOk) {
@@ -33,6 +33,7 @@ public class NullPasswordController implements Controllers {
             String newPW2 = Connections.getInstance().getData();
             if (newPW.equals(newPW2)) {
                 user.setPasswordSHA1(SHA1Generator.getSHA1(newPW));
+                user.setFailedTried(0); // 重置错误次数
                 ud.updateByID(user);
                 flag = 1;
                 Connections.getInstance().sendData("重置完成 请去登录吧");
@@ -42,6 +43,7 @@ public class NullPasswordController implements Controllers {
             }
         } else {
             System.out.println("您输入的密码格式错误");
+            System.out.println("请重新尝试登录修改");
             flag = 2;
         }
     }

@@ -27,7 +27,7 @@ public class ExploreItemsController implements Controllers {
         System.out.println("请输入要查找的物品名称（支持模糊搜索）");
         String itemName = Connections.getInstance().getData();
         ArrayList<Storable> items = dao.ItemDaoImpl.getInstance().queryLikeName(itemName);
-        for (Storable st : items){
+        for (Storable st : items) {
             Item item = (Item) st;
             Connections.getInstance().sendData(item.toUserString());
         }
@@ -49,7 +49,9 @@ public class ExploreItemsController implements Controllers {
                         return;
                     }
                     item.setNum(item.getNum() - num);
-                    dao.ShoppingCartDaoImpl.getInstance().insert(new CartItem(item, user));
+                    CartItem cartItem = new CartItem(item, user);
+                    cartItem.setNum(num);
+                    dao.ShoppingCartDaoImpl.getInstance().insert(cartItem);
                     dao.ItemDaoImpl.getInstance().updateByID(item);
                     System.out.println("添加成功");
                 }

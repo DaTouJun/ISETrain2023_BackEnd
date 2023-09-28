@@ -9,7 +9,6 @@ import processes.controller.NullPasswordController;
 import processes.menus.normalUser.UserFuncMenu;
 import utils.SHA1Generator;
 
-// TODO
 public class AlterPasswordController implements Controllers {
     User currentUser;
     boolean userChanged;

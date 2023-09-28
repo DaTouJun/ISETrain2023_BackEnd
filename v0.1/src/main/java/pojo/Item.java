@@ -2,7 +2,9 @@ package pojo;
 
 import lombok.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 @Setter
 @Getter
@@ -22,6 +24,12 @@ public class Item implements Storable {
     public String toUserString() {
         return "物品编号:" + ID + "  物品名称:  " + name + "  制造商: " + producer + " 生产日期: "
                 + dateInProduced + " 类型: " + type + " 进价: " + primeCost + " 零售价: " + retailPrice + " 数量: " + num;
+    }
+
+    public String toUserStringWithoutID() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return "物品名称:  " + name + "  制造商: " + producer + " 生产日期: "
+                + sdf.format(dateInProduced) + " 类型: " + type + " 进价: " + primeCost + " 零售价: " + retailPrice + " 数量: " + num;
     }
 }
 

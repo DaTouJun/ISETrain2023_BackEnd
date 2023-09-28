@@ -31,7 +31,7 @@ public class UserFuncMenu implements Menus {
             nextInstructions = Integer.decode(Connections.getInstance().getData());
         } catch (Exception e) {
             System.out.println("输入的字符错误，应为数字");
-            return new WelcomeMenu();
+            return new UserFuncMenu();
         }
 
         return switch (nextInstructions) {

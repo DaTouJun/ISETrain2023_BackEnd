@@ -67,7 +67,7 @@ public class ItemDaoTest {
         item.setID(2);
         item.setName("绿豆");
         item.setNum(13);
-        item.setDataInProduced(new Date());
+        item.setDateInProduced(new Date());
 
         ItemDaoImpl itemDao = (ItemDaoImpl) ItemDaoImpl.getInstance();
         itemDao.updateByID(item);

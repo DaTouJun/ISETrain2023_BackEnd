@@ -110,6 +110,7 @@ public class ShoppingCartDaoImpl implements DaoInterface {
         cartItem.setProducer(rs.getString("Producer"));
         cartItem.setAddDate(DateUtilToSql.reconv(rs.getDate("addDate")));
         cartItem.setNum(rs.getInt("Num"));
+        cartItem.setPrice(rs.getDouble("Price"));
         return cartItem;
     }
 
