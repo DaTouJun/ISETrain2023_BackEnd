@@ -4,7 +4,6 @@ import connections.Connections;
 import dao.UserDaoImpl;
 import pojo.User;
 import processes.Processes;
-import processes.menus.Menus;
 import processes.menus.WelcomeMenu;
 import utils.EmailSender;
 import utils.PasswordValidation;

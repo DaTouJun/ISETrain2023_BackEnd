@@ -43,7 +43,6 @@ public class ShoppingCartController implements Controllers {
         String prompt = Connections.getInstance().getData();
         if (prompt.equals("y")) {
             System.out.println("调起结算接口(模拟)");
-            DaoInterface dao = ShoppingHistoryDaoImpl.getInstance();
             for (var val : list) {
                 ShoppingHistoryDaoImpl.getInstance().insert(new Deal(val));
                 ShoppingCartDaoImpl.getInstance().deleteByID(val.getID());

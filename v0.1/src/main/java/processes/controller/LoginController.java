@@ -96,7 +96,6 @@ public class LoginController implements Controllers {
             case 3 -> new NullPasswordController();
             case -1 -> null;    // 返回主菜单
             default -> {
-                System.out.println("");
                 yield null;    // 同样返回主菜单
             }
         };

@@ -1,4 +1,4 @@
-package processes.controller.administrator;
+package processes.controller.administrator.manageitems;
 
 import connections.Connections;
 import pojo.Item;
@@ -169,33 +169,20 @@ public class EditItemController implements Controllers {
 
         int nextInstruct = Integer.parseInt(con.getData());
         switch (nextInstruct) {
-            case 1:
-                changeItemName(i);
-                break;
-            case 2:
-                changeItemProducer(i);
-                break;
-            case 3:
-                changeItemType(i);
-                break;
-            case 4:
-                changeItemPrimeCost(i);
-                break;
-            case 5:
-                changeItemRetailCost(i);
-                break;
-            case 6:
-                changeItemNum(i);
-                break;
-            case 7:
-                changeItemDateInProduced(i);
-                break;
-            case 8:
+            case 1 -> changeItemName(i);
+            case 2 -> changeItemProducer(i);
+            case 3 -> changeItemType(i);
+            case 4 -> changeItemPrimeCost(i);
+            case 5 -> changeItemRetailCost(i);
+            case 6 -> changeItemNum(i);
+            case 7 -> changeItemDateInProduced(i);
+            case 8 -> {
                 state = 0;
-                return;
-            default:
+            }
+            default -> {
                 System.out.println("您输入的菜单编号错误 将返回菜单");
                 state = 1;
+            }
         }
     }
 
