@@ -70,6 +70,7 @@ public class LoginController implements Controllers {
             }
             userChanged = true;
             con.sendData("登录成功");
+            u.setFailedTried(0);        // 登录成功删除数量限制
             currentUser = u;
         } else {
             // 处理密码错误的情况
