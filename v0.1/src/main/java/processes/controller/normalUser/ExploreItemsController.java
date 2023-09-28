@@ -27,9 +27,13 @@ public class ExploreItemsController implements Controllers {
         System.out.println("请输入要查找的物品名称（支持模糊搜索）");
         String itemName = Connections.getInstance().getData();
         ArrayList<Storable> items = dao.ItemDaoImpl.getInstance().queryLikeName(itemName);
+        if (items != null){
         for (Storable st : items) {
             Item item = (Item) st;
             Connections.getInstance().sendData(item.toUserString());
+        }}
+        else{
+            Connections.getInstance().sendData("未查找到物品");
         }
         System.out.println("是否要添加物品到购物车？要添加请输入y否则输入n");
         String prompt = Connections.getInstance().getData();

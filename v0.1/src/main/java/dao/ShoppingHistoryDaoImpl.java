@@ -20,7 +20,7 @@ public class ShoppingHistoryDaoImpl implements DaoInterface {
     private static ShoppingHistoryDaoImpl instance;
 
     public static ShoppingHistoryDaoImpl getInstance() {
-        if (instance != null)
+        if (instance == null)
             instance = new ShoppingHistoryDaoImpl();
         return instance;
     }

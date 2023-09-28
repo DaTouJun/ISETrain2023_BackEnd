@@ -2,14 +2,13 @@ package processes.controller.normalUser;
 
 import connections.Connections;
 import dao.DaoInterface;
+import dao.ShoppingCartDaoImpl;
 import dao.ShoppingHistoryDaoImpl;
 import pojo.CartItem;
 import pojo.Deal;
-import pojo.Storable;
 import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
-import processes.menus.WelcomeMenu;
 import processes.menus.normalUser.UserFuncMenu;
 
 import java.util.ArrayList;
@@ -47,14 +46,10 @@ public class ShoppingCartController implements Controllers {
             DaoInterface dao = ShoppingHistoryDaoImpl.getInstance();
             for (var val : list) {
                 ShoppingHistoryDaoImpl.getInstance().insert(new Deal(val));
+                ShoppingCartDaoImpl.getInstance().deleteByID(val.getID());
             }
             System.out.println("完成结算(模拟),共花费" + totalPrice);
             user1.setTotalConsumptions(user1.getTotalConsumptions() + totalPrice);
-/*
-            switch (user1.getLevel()) {
-                // TODO： 不同等级用户打折
-            }
-*/
             state = 1;
         } else {
             state = 0;

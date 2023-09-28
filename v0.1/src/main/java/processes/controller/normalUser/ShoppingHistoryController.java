@@ -23,8 +23,11 @@ public class ShoppingHistoryController implements Controllers {
         this.user = user;
         System.out.println("这里是您的购物历史");
         ArrayList<Deal> list = ShoppingHistoryDaoImpl.getInstance().queryUserID(user.getID());
-        for (var val : list)
-            System.out.println(val.toUserViewString());
+        if (list != null)
+            for (var val : list)
+                System.out.println(val.toUserViewString());
+        else
+            System.out.println("购物历史为空");
         System.out.println("显示完成，返回用户菜单");
     }
 
