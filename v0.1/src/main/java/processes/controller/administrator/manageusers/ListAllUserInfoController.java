@@ -1,15 +1,13 @@
-package processes.controller.administrator;
+package processes.controller.administrator.manageusers;
 
 import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
-import processes.menus.administrator.AdminFuncMenu;
+import processes.menus.administrator.ManageUserMenu;
 
-// TODO
-public class ManageUserController implements Controllers {
+public class ListAllUserInfoController implements Controllers {
     boolean userChanged;
     User currentUser;
-    int state = 0;
 
     @Override
     public boolean getUserChanged() {
@@ -17,8 +15,8 @@ public class ManageUserController implements Controllers {
     }
 
     @Override
-    public void startProcess(User u) {
-        currentUser = u;
+    public void startProcess(User user) {
+
     }
 
     @Override
@@ -28,10 +26,6 @@ public class ManageUserController implements Controllers {
 
     @Override
     public Processes getProcess() {
-        if (state == 0){
-            return new AdminFuncMenu();
-        }
-
-        return new AdminFuncMenu();
+        return new ManageUserMenu();
     }
 }

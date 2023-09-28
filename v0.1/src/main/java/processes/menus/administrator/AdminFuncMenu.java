@@ -3,8 +3,6 @@ package processes.menus.administrator;
 import connections.Connections;
 import pojo.User;
 import processes.Processes;
-import processes.controller.LoginController;
-import processes.controller.administrator.ManageUserController;
 import processes.controller.administrator.PasswordController;
 import processes.menus.Menus;
 import processes.menus.WelcomeMenu;
@@ -31,7 +29,7 @@ public class AdminFuncMenu implements Menus {
         }
 
         return switch (nextInstructions) {
-            case 1 -> new ManageUserController();
+            case 1 -> new ManageUserMenu();
             case 2 -> new ManageItemsMenu();
             case 3 -> new PasswordController();
             case 0 -> new WelcomeMenu();

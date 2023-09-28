@@ -2,6 +2,7 @@ package pojo;
 
 import lombok.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Setter
@@ -19,6 +20,24 @@ public class User implements Storable {
     private double totalConsumptions = 0;
     private int failedTried;
     private Date registeredTime;
+
+    private String getLevelString() {
+        return switch (level) {
+            case 0 -> "管理员";
+            case 1 -> "金牌用户";
+            case 2 -> "银牌用户";
+            case 3 -> "铜牌用户";
+            case 4 -> "游客";
+            default -> "未知用户等级";
+        };
+    }
+
+    public String toAdminString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return "用户编号" + ID + "  用户名 " + name + " 用户等级 : " + getLevelString() +
+                "邮箱 : " + email + " 电话号码 : " + phoneNumber + " 总消费 : " + totalConsumptions
+                + " 注册时间 : " + sdf.format(registeredTime);
+    }
 }
 
 /* DLL of userTable
