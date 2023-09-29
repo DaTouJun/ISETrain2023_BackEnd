@@ -113,6 +113,7 @@ public class UserDaoImpl implements DaoInterface {
         user.setRegisteredTime(rs.getTimestamp("registeredTime"));
         user.setFailedTried(rs.getInt("FailedTried"));
         user.setPasswordSHA1(rs.getString("Password"));
+        user.setTotalConsumptions(rs.getDouble("TotalConsumptions"));
         return user;
     }
 

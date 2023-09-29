@@ -91,9 +91,11 @@ public class AddItemController implements Controllers {
                     case 1, 3, 5, 7, 8, 10, 12:
                         if (day > 31 || day < 1)
                             throw new RuntimeException("您收入的日期不是一个有效的日期");
+                        break;      // 么有fallshtrough也没警告
                     case 4, 6, 9, 11:
                         if (day > 30 || day < 1)
                             throw new RuntimeException("您输入的日期不是一个有效的日期");
+                        break;
                     case 2:
                         if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
                             if (day > 29 || day < 1)
@@ -110,7 +112,6 @@ public class AddItemController implements Controllers {
                 e.printStackTrace();
                 stateNum = 2;
             } catch (RuntimeException e) {
-                e.printStackTrace();
                 stateNum = 2;
             }
         }

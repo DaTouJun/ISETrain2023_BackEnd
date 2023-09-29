@@ -2,7 +2,6 @@ package dao;
 
 import pojo.Item;
 import pojo.Storable;
-import pojo.User;
 import utils.DBUtils;
 import utils.DateUtilToSql;
 
@@ -30,6 +29,7 @@ public class ItemDaoImpl implements DaoInterface {
         item.setPrimeCost(rs.getDouble("PrimeCost"));
         item.setRetailPrice(rs.getDouble("RetailPrice"));
         item.setNum(rs.getLong("Num"));
+        item.setType(rs.getString("Type"));
         return item;
     }
 

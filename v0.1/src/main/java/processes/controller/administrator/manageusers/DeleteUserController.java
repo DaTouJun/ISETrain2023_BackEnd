@@ -4,6 +4,7 @@ import connections.Connections;
 import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
+import processes.menus.administrator.ManageUserMenu;
 
 public class DeleteUserController implements Controllers {
     @Override
@@ -40,6 +41,6 @@ public class DeleteUserController implements Controllers {
 
     @Override
     public Processes getProcess() {
-        return null;
+        return new ManageUserMenu();
     }
 }

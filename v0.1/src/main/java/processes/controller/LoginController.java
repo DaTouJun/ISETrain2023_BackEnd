@@ -43,14 +43,14 @@ public class LoginController implements Controllers {
 
 
         // 验证
-        UserDaoImpl ud = (UserDaoImpl) UserDaoImpl.getInstance();
+        UserDaoImpl ud = UserDaoImpl.getInstance();
         User u = (User) ud.searchByName(tempu.getName());
         if (u == null) {
             con.sendData("找不到对应用户名的用户");
             state = -1;
             return;
         }
-        if (u.getFailedTried() >= 3 && u.getLevel() != 0) {
+        if (u.getFailedTried() >= 5 && u.getLevel() != 0) {
             con.sendData("用户输入密码错误次数过多 用户已经锁定");
             state = -1;
             return;
@@ -71,13 +71,14 @@ public class LoginController implements Controllers {
             userChanged = true;
             con.sendData("登录成功");
             u.setFailedTried(0);        // 登录成功删除数量限制
+            ud.updateByID(u);
             currentUser = u;
         } else {
             // 处理密码错误的情况
             u.setFailedTried(u.getFailedTried() + 1);
             ud.updateByID(u);
             System.out.println("密码输入错误，当前输入错误次数为" + u.getFailedTried());
-            System.out.println("输入错误次数大于3将禁止登录");
+            System.out.println("输入错误次数大于5次将禁止登录");
             System.out.println("*****返回主菜单*****");
             state = -1;
         }

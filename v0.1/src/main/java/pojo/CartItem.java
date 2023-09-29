@@ -27,7 +27,7 @@ public class CartItem implements Storable {
         itemID = item.getID();
         addDate = new java.util.Date();
         price = item.getRetailPrice();
-        System.out.println(price);
+//        System.out.println(price);
         // wait for item
     }
 

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class ListAllItemController implements Controllers {
     boolean userChanged;
     User currentUser;
-    int state = 0;
     @Override
     public boolean getUserChanged() {
         return userChanged;
@@ -28,7 +27,7 @@ public class ListAllItemController implements Controllers {
         ArrayList<Storable> items = dao.ItemDaoImpl.getInstance().queryAll();
         for (Storable sI : items){
             Item item = (Item) sI;
-            con.sendData(item.toString());
+            con.sendData(item.toUserString());
         }
         con.sendData("返回物品管理菜单 \n");
     }

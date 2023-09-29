@@ -7,13 +7,13 @@ import pojo.User;
 import processes.Processes;
 import processes.controller.Controllers;
 import processes.menus.administrator.AdminFuncMenu;
+import processes.menus.administrator.ManageItemsMenu;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-// TODO
 public class EditItemController implements Controllers {
     boolean userChanged;
     User currentUser;
@@ -23,6 +23,7 @@ public class EditItemController implements Controllers {
         System.out.println("请输入物品名称");
         i.setName(Connections.getInstance().getData());
         dao.ItemDaoImpl.getInstance().updateByID(i);
+        System.out.println("修改成功");
     }
 
     private void changeItemProducer(Item i) {
@@ -168,6 +169,7 @@ public class EditItemController implements Controllers {
         con.sendData(menus);
 
         int nextInstruct = Integer.parseInt(con.getData());
+        state = 2;
         switch (nextInstruct) {
             case 1 -> changeItemName(i);
             case 2 -> changeItemProducer(i);
@@ -181,7 +183,6 @@ public class EditItemController implements Controllers {
             }
             default -> {
                 System.out.println("您输入的菜单编号错误 将返回菜单");
-                state = 1;
             }
         }
     }
@@ -195,6 +196,8 @@ public class EditItemController implements Controllers {
     public Processes getProcess() {
         if (state == 0) {
             return new AdminFuncMenu();
+        } else if (state == 2) {
+            return new ManageItemsMenu();
         }
 
         return new AdminFuncMenu();
